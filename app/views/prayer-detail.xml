@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+  <ActionBar title="Prayer Details">
+    <NavigationButton text="Back" android.systemIcon="ic_menu_back"/>
+  </ActionBar>
+
+  <ScrollView>
+    <StackLayout class="p-4">
+      <Label text="{{ prayer.prayerFor }}" class="text-2xl font-bold mb-2"/>
+      
+      <StackLayout class="bg-gray-100 p-4 rounded-lg mb-4">
+        <Label text="{{ prayer.prayerRequest }}" textWrap="true" class="text-lg"/>
+        <FlexboxLayout class="mt-2">
+          <Label text="Submitted by: " class="text-sm text-gray-600"/>
+          <Label text="{{ prayer.isSubmitterNamePublic ? prayer.submitterName : 'Anonymous' }}" 
+                 class="text-sm text-gray-600"/>
+        </FlexboxLayout>
+        <Label text="{{ prayer.createdAt, 'MM/dd/yyyy' }}" class="text-sm text-gray-500"/>
+      </StackLayout>
+
+      <StackLayout visibility="{{ prayer.isAnswered ? 'visible' : 'collapsed' }}" 
+                   class="bg-green-100 p-4 rounded-lg mb-4">
+        <Label text="Prayer Answered" class="text-lg font-bold text-green-700"/>
+        <Label text="{{ prayer.answerDescription }}" textWrap="true" class="text-green-700"/>
+        <Label text="{{ prayer.answerDate, 'MM/dd/yyyy' }}" class="text-sm text-green-600"/>
+      </StackLayout>
+
+      <Button text="{{ prayer.isAnswered ? 'Update Answer' : 'Mark as Answered' }}" 
+              tap="{{ onAnsweredTap }}" 
+              class="-primary mb-2"/>
+      
+      <Label text="Comments" class="text-xl font-bold mt-4 mb-2"/>
+      <ListView items="{{ comments }}" height="200">
+        <ListView.itemTemplate>
+          <StackLayout class="p-2 border-b border-gray-200">
+            <Label text="{{ comment }}" textWrap="true"/>
+            <Label text="{{ createdAt, 'MM/dd/yyyy' }}" class="text-sm text-gray-500"/>
+          </StackLayout>
+        </ListView.itemTemplate>
+      </ListView>
+
+      <GridLayout rows="auto" columns="*, auto" class="mt-4">
+        <TextField col="0" text="{{ newComment }}" hint="Add a comment"/>
+        <Button col="1" text="Send" tap="{{ onAddComment }}" class="-primary"/>
+      </GridLayout>
+    </StackLayout>
+  </ScrollView>
+</Page>

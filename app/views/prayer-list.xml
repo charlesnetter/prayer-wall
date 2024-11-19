@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+  <ActionBar title="Prayer Requests">
+    <ActionItem text="Add" tap="onAddTap" ios.position="right" android.position="actionBar"/>
+    <ActionItem text="Filter" tap="onFilterTap" ios.position="right" android.position="actionBar"/>
+  </ActionBar>
+
+  <GridLayout rows="auto, *">
+    <SegmentedBar row="0" items="{{ filterOptions }}" selectedIndex="{{ selectedFilterIndex }}" class="m-4"/>
+    
+    <ListView row="1" items="{{ prayers }}" itemTap="onPrayerTap">
+      <ListView.itemTemplate>
+        <StackLayout class="p-4 border-b border-gray-200">
+          <Label text="{{ prayerFor }}" class="text-lg font-semibold"/>
+          <Label text="{{ prayerRequest }}" textWrap="true" class="text-gray-600"/>
+          <FlexboxLayout class="mt-2">
+            <Label text="{{ submitterName }}" class="text-sm text-gray-500"/>
+            <Label text="{{ createdAt, 'MM/dd/yyyy' }}" class="text-sm text-gray-500 ml-auto"/>
+          </FlexboxLayout>
+          <FlexboxLayout class="mt-2">
+            <Label text="✓ Answered" class="text-green-600" visibility="{{ isAnswered ? 'visible' : 'collapsed' }}"/>
+            <Label text="🔒 Private" class="text-blue-600 ml-2" visibility="{{ !isPublic ? 'visible' : 'collapsed' }}"/>
+          </FlexboxLayout>
+        </StackLayout>
+      </ListView.itemTemplate>
+    </ListView>
+  </GridLayout>
+</Page>

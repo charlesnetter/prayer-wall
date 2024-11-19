@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+  <ScrollView>
+    <StackLayout class="p-4">
+      <Label text="Submit Prayer Request" class="text-2xl font-bold mb-4"/>
+      
+      <Label text="Your Name" class="font-medium"/>
+      <TextField text="{{ submitterName }}" hint="Enter your name" class="mb-2"/>
+      <FlexboxLayout class="mb-4">
+        <CheckBox checked="{{ isSubmitterNamePublic }}" text="Public"/>
+        <CheckBox checked="{{ isAnonymous }}" text="Anonymous"/>
+      </FlexboxLayout>
+
+      <Label text="Contact Information" class="font-medium"/>
+      <TextField text="{{ email }}" hint="Email" keyboardType="email" class="mb-2"/>
+      <TextField text="{{ phone }}" hint="Phone Number" keyboardType="phone" class="mb-4"/>
+
+      <Label text="Prayer For" class="font-medium"/>
+      <TextField text="{{ prayerFor }}" hint="Name of person to pray for" class="mb-2"/>
+      <FlexboxLayout class="mb-4">
+        <CheckBox checked="{{ isPrayerForNamePublic }}" text="Public"/>
+        <CheckBox checked="{{ isPrayerForPrivate }}" text="Private"/>
+      </FlexboxLayout>
+
+      <Label text="Prayer Request" class="font-medium"/>
+      <TextView text="{{ prayerRequest }}" hint="Enter your prayer request" height="100" class="mb-4"/>
+
+      <Label text="Privacy Setting" class="font-medium"/>
+      <DropDown items="{{ privacyOptions }}" selectedIndex="{{ selectedPrivacyIndex }}" class="mb-4"/>
+
+      <Label text="Expiration Date (Optional)" class="font-medium"/>
+      <DatePicker date="{{ expirationDate }}" class="mb-4"/>
+
+      <Button text="Submit Prayer Request" tap="{{ onSubmit }}" class="-primary"/>
+    </StackLayout>
+  </ScrollView>
+</Page>
